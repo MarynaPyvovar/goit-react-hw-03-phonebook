@@ -12,6 +12,23 @@ export default class Phonebook extends Component {
         filter: '',
     }
 
+    componentDidMount() {
+        const contactsInStorage = localStorage.getItem('contacts');
+
+        if (contactsInStorage) {
+            const parsedContacts = JSON.parse(contactsInStorage);
+            this.setState(
+                { contacts: parsedContacts }
+            )
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.contacts !== prevState.contacts) {
+            localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+        }
+    }
+
     handleChange = (e) => {
         const { name, value } = e.target;
         this.setState({

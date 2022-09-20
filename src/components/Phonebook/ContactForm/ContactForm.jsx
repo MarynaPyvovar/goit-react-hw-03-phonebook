@@ -22,7 +22,6 @@ export default class ContactForm extends Component {
 
         this.setState(() => {
             this.props.addContact(name, number)
-            console.log(name)
 
             return {
                 name: '',
